@@ -5,7 +5,7 @@
     android:id="@+id/charactersView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/vanillaBackground"
     android:fitsSystemWindows="true">
 
     <!-- Dummy item to prevent EditText from receiving focus on initial load -->
@@ -50,7 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
+        android:background="@color/vanillaBackground"
         android:gravity="center"
-        android:text="@string/marvel_copyright_notice" />
+        android:text="@string/marvel_copyright_notice"
+        android:textColor="@android:color/black" />
 </RelativeLayout>
