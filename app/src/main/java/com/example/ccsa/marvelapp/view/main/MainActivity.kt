@@ -7,6 +7,7 @@ import com.example.ccsa.marvelapp.R
 import com.example.ccsa.marvelapp.data.MarvelRepository
 import com.example.ccsa.marvelapp.model.MarvelCharacter
 import com.example.ccsa.marvelapp.presenter.MainPresenter
+import com.example.ccsa.marvelapp.view.character.CharacterProfileActivity
 import com.example.ccsa.marvelapp.view.common.BaseActivityWithPresenter
 import com.example.ccsa.marvelapp.view.common.addOnTextChangedListener
 import com.example.ccsa.marvelapp.view.common.bindToSwipeRefresh
@@ -34,12 +35,19 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
     }
 
     override fun show(items: List<MarvelCharacter>) {
-        val categoryItemAdapters = items.map(::CharacterItemAdapter)
+        val categoryItemAdapters = items.map(::createCategoryItemAdapter)
         recyclerView.adapter = MainListAdapter(categoryItemAdapters)
     }
 
     override fun showError(error: Throwable) {
         toast("Error: ${error.message}")
         error.printStackTrace()
+    }
+
+    private fun createCategoryItemAdapter(character: MarvelCharacter)
+            = CharacterItemAdapter(character, { showHeroProfile(character) })
+
+    private fun showHeroProfile(character: MarvelCharacter) {
+        CharacterProfileActivity.start(this, character)
     }
 }

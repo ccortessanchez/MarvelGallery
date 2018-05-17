@@ -11,7 +11,8 @@ import com.example.ccsa.marvelapp.view.common.bindView
 import com.example.ccsa.marvelapp.view.common.loadImage
 
 class CharacterItemAdapter(
-        val character: MarvelCharacter
+        val character: MarvelCharacter,
+        val clicked: (MarvelCharacter) -> Unit
 ): ItemAdapter<CharacterItemAdapter.ViewHolder>(R.layout.item_character) {
 
     /**
@@ -22,6 +23,7 @@ class CharacterItemAdapter(
     override fun ViewHolder.onBindViewHolder() {
         textView.text = character.name
         imageView.loadImage(character.imageUrl)
+        itemView.setOnClickListener { clicked(character) }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
