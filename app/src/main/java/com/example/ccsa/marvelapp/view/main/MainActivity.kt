@@ -8,6 +8,7 @@ import com.example.ccsa.marvelapp.data.MarvelRepository
 import com.example.ccsa.marvelapp.model.MarvelCharacter
 import com.example.ccsa.marvelapp.presenter.MainPresenter
 import com.example.ccsa.marvelapp.view.common.BaseActivityWithPresenter
+import com.example.ccsa.marvelapp.view.common.addOnTextChangedListener
 import com.example.ccsa.marvelapp.view.common.bindToSwipeRefresh
 import com.example.ccsa.marvelapp.view.common.toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,6 +25,11 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
         setContentView(R.layout.activity_main)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         swipeRefreshView.setOnRefreshListener { presenter.onRefresh() }
+        searchView.addOnTextChangedListener {
+            onTextChanged { text, _, _, _ ->
+                presenter.onSearchChanged(text)
+            }
+        }
         presenter.onViewCreated()
     }
 
